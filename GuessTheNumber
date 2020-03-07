@@ -1,0 +1,58 @@
+
+import java.util.Random;
+import java.util.*;
+
+/**
+ * Guess The Number: A Game based on Binary Search
+ * Concept & Created by Mujtahid Akon
+ * Created for CSE220: Data Structures Course
+ * @author Mujtahid Al-Islam Akon (AKO), Lecturer, Department of CSE, BRACU
+ * @all rights reserved
+ */
+public class GuessTheNumber {
+    public static void main(String[] args) {
+        while(true){
+            int ATTEMPTS = 6;
+            int LIMIT = (int) Math.pow(2,ATTEMPTS);
+            int TARGET = new Random().nextInt(LIMIT) + 1;
+            System.out.println("Target: "+ TARGET);
+            System.out.println("============= Welcome to GuessGame ================");
+            System.out.println("The computer will guess a positive integer number between 1-"+ LIMIT +".\n\t"
+                    + "You need to guess the number with "+ ATTEMPTS + " attempts.\n\t"
+                    + "For every wrong answer, you will recieve a suggestion.\n"
+                    + "Let's see how smart you are!...");
+            System.out.println("===================================================");
+            int iteration = 1;
+            int key = -1;
+            
+            Scanner kb = new Scanner(System.in);
+            for(;iteration<=ATTEMPTS; iteration++){
+                System.out.print("attempt# "+ iteration+ ": Enter your guessed number: ");
+                key = kb.nextInt();
+                if(key == TARGET){
+                    System.out.println("Congratulations! You win!!!\n"
+                            + "Total attempts required: "+ iteration+ "\n");
+                    break;
+                }
+                else{
+                    if(iteration != ATTEMPTS){
+                        System.out.println("Sorry! the number you have guessed is "+ (key<TARGET? "less ": "greater ") + "than the TARGET number\n"
+                            + "Please choose a "+ (key<TARGET? "larger ": "smaller ") + "number. "
+                                    + "Attempts left: " + (ATTEMPTS- iteration)+"\n" );
+                    }
+                }
+            }
+            if(iteration== (ATTEMPTS+1)){
+                System.out.println("Sorry. You lost :( The correct guessed number was: "+ TARGET+ "\n"
+                        + "Please try again.");
+            }
+            System.out.println("Press 0 (zero) to quit the game.\n"
+                    + "Press 1 to play again\n\n");
+            key = kb.nextInt();
+            if(key==0){
+                System.out.println("Thanks for playing");
+                return;
+            }
+        }
+    }
+}
